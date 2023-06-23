@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  font-size: 80%;
+  --color-pry: #ff5c00;
+  --color-pry-light: #ffc738;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  /* font-size: 1.6rem; */
+  font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
   min-height: 100vh;
+  padding: 0 !important;
+}
+
+#root {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+.nav {
+}
+
+main {
+  position: relative;
+  min-height: 87vh;
+}
+
+[class^='btn'] {
+  transition: color 0.2s;
+  /* font-size: 1.6rem !important; */
+}
+
+.bars {
+  height: 97%;
+  min-width: 100%;
+  max-width: 100%;
+  padding-inline: 3px;
+  position: absolute;
+  bottom: 0;
+}
+
+button {
+  padding: 0.7em 1.2em !important;
+  transition: all 0.2s ease-in-out !important;
+  display: flex !important;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-pry {
+  background: linear-gradient(92deg, #ff5c00 60%, #ffc738 100%);
+  box-shadow: 0px 5px 5px #ffc2a0;
+  color: #fff !important;
+  border-radius: 999px;
+  border: none;
+  background-size: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-pry:hover {
+  /* background: linear-gradient(92deg, #ffc738 10%, #ff5c00 70%); */
+  box-shadow: 0px 6px 12px #ffc2a0;
+  /* background-size: 200%; */
+  /* background: var(--color-pry) !important; */
+}
+
+.btn-pry-outline,
+.btn-pry-outline:hover,
+.btn-pry-outline:active,
+.btn-pry-outline:focus {
+  border: 1px solid var(--color-pry-light) !important;
+  border-radius: 999px;
+}
+.btn-pry-outline:hover {
+  color: var(--color-pry) !important;
+}
+.color-pry {
+  color: var(--color-pry) !important;
+}
+
+button.dropdown-toggle {
+  padding: 0 !important;
+  border: none !important;
+  /* border: 1px solid #eee !important;
+  border-radius: 999px; */
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2), 0 1px 15px rgba(0, 0, 0, 0.1);
+  color: var(--color-pry);
+}
+.dropdown-menu > * {
+  padding: 8px 15px;
+}
+.dropdown-menu > *:hover {
+  color: var(--color-pry) !important;
+}
+.dropdown-menu > *:active {
+  background-color: none !important;
 }
