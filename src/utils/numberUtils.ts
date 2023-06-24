@@ -2,7 +2,7 @@ export const genRandomNumber = (lower: number = 10, upper: number = 100) => {
   return Math.floor(Math.random() * (upper - lower)) + lower;
 };
 
-export const genRandomBarColor = (exceptions?: string[]) => {
+export const genRandomColor = (exceptions?: string[]) => {
   const colors = [
     '#6D09BC',
     '#000000',

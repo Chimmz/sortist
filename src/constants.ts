@@ -1,8 +1,8 @@
 export const algorithmNames = {
-  BUBBLE: 'Bubble sort',
-  SELECTION: 'Selection sort',
-  QUICK: 'Quick sort',
-  INSERTION: 'Insertion sort',
-  COUNTING: 'Counting sort',
-  RADIX: 'Radix sort'
+  BUBBLE_SORT: 'Bubble sort',
+  SELECTION_SORT: 'Selection sort',
+  QUICK_SORT: 'Quick sort',
+  INSERTION_SORT: 'Insertion sort',
+  COUNTING_SORT: 'Counting sort',
+  RADIX_SORT: 'Radix sort'
 };

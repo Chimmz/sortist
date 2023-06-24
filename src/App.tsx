@@ -3,15 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import './App.css';
 import Main from './components/Main';
+import { AppContextProvider } from './context/AppContext';
 
 function App() {
-  const [algo, setAlgo] = useState<string>();
   return (
-    <>
+    <AppContextProvider>
       <Navbar />
       <Main />
       <footer></footer>
-    </>
+    </AppContextProvider>
   );
 }
 
