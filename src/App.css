@@ -31,6 +31,10 @@ body {
 main {
   position: relative;
   min-height: 87vh;
+  /* background-image: url('../public/img/3d-white-img.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; */
 }
 
 [class^='btn'] {

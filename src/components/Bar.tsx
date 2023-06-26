@@ -9,19 +9,22 @@ const Bar = (props: BarProps & { width: number | undefined; movements: BarMoveme
   useEffect(() => {
     if (!props.movements?.length) return;
 
-    // console.log(`Movements for ${props.id}: `, props.movements);
-    // props.movements.forEach(mov => {
-    //   const { prevIndex, newIndex } = mov;
-    //   setTimeout(() => {
-    //   setDisplacement(newIndex - prevIndex);
-    //   }, 500);
-    // });
-    const { prevIndex, newIndex } = props.movements.slice(-1).pop()!;
-    setDisplacement(newIndex - prevIndex);
+    // Dividing by 2 because I noticed React does a weird repitition when adding a new movement
+    const movements = props.movements.slice(props.movements.length / 2);
+
+    // if (props.id == '1') {
+    //   console.log(`movements for ${props.height}: `, movements);
+    // }
+
+    movements.forEach(movt => {
+      const { prevIndex, newIndex } = movt;
+      setDisplacement(state => state + (newIndex - prevIndex));
+    });
   }, [props.movements]);
 
   const barStyles = useMemo(() => {
     return {
+      color: 'white',
       height: `${props.height}%`,
       backgroundColor: props.color,
       transform: !props.width ? 'none' : `translateX(${displacement * props.width!}px)`

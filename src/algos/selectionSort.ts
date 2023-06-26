@@ -1,45 +1,49 @@
 import { Algo, BarMovement, BarProps } from '../types';
 
+const findShortestBar = (bars: BarProps[]) => {
+  const barsArray = bars.slice(0);
+  let shortestBar = barsArray[0],
+    shortestBarIndex = 0;
+
+  for (let i = 0; i < barsArray.length; i++) {
+    if (barsArray[i].height < shortestBar.height) {
+      shortestBar = barsArray[i];
+      shortestBarIndex = i;
+    }
+  }
+
+  return [shortestBar, shortestBarIndex] as [BarProps, number];
+};
+
 const selectionSort: Algo = async (bars: BarProps[], opts) => {
-  // console.log({ 'opts.onSortStart': opts.onSortStart });
+  const barsArray = bars.slice(0);
   opts.onSortStart?.();
 
-  await new Promise(resolve => {
-    for (let lastSortedIndex = 0; lastSortedIndex <= bars.length - 2; lastSortedIndex++) {
-      console.log('Iterating..');
+  for (let lastSortedIndex = 0; lastSortedIndex <= barsArray.length - 2; lastSortedIndex++) {
+    let shortestBarIndex = lastSortedIndex;
+    let shortestBar = barsArray[shortestBarIndex];
 
-      let shortestBarIndex = lastSortedIndex;
-      let shortestBar = bars[shortestBarIndex];
-
-      for (let i = lastSortedIndex + 1; i < bars.length; i++) {
-        if (bars[i].height < shortestBar.height) {
-          shortestBar = bars[i];
-          shortestBarIndex = i;
-        }
+    for (let i = lastSortedIndex + 1; i < barsArray.length; i++) {
+      if (barsArray[i].height < shortestBar.height) {
+        shortestBar = barsArray[i];
+        shortestBarIndex = i;
       }
-      console.log(
-        `Shifting ${bars[lastSortedIndex].height} from ${lastSortedIndex} to ${shortestBarIndex}`
-      );
-      console.log(
-        `Shifting ${bars[shortestBarIndex].height} from ${shortestBarIndex} to ${lastSortedIndex}`
-      );
-
-      opts.addMovement(
-        bars[lastSortedIndex].id,
-        new BarMovement([lastSortedIndex, shortestBarIndex])
-      );
-      opts.addMovement(
-        bars[shortestBarIndex].id,
-        new BarMovement([shortestBarIndex, lastSortedIndex])
-      );
-
-      // opts.addMovements(
-      //   new BarMovement(bars[lastSortedIndex].id, [lastSortedIndex, shortestBarIndex]),
-      //   new BarMovement(bars[shortestBarIndex].id, [shortestBarIndex, lastSortedIndex])
-      // );
     }
-    resolve(null);
-  });
+
+    opts.addMovement(
+      barsArray[lastSortedIndex].id,
+      new BarMovement([lastSortedIndex, shortestBarIndex])
+    );
+    opts.addMovement(
+      barsArray[shortestBarIndex].id,
+      new BarMovement([shortestBarIndex, lastSortedIndex])
+    );
+
+    [barsArray[lastSortedIndex], barsArray[shortestBarIndex]] = [
+      barsArray[shortestBarIndex],
+      barsArray[lastSortedIndex]
+    ];
+  }
   opts.onSortFinish?.();
 };
 

@@ -7,7 +7,7 @@ const Main = function () {
   return (
     <main className="bg-white flex-grow-1" style={{}}>
       <Bars
-        barsCount={3}
+        barsCount={500}
         sortAlgo={activeAlgoName}
         onSorting={setIsSorting?.bind(null, true)}
         onSorted={setIsSorting?.bind(null, false)}

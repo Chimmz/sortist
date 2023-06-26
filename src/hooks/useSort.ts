@@ -9,14 +9,10 @@ interface UseSortParams {
   onSorted?: () => void;
 }
 
-export interface AllBarMovements {
-  [barId: string]: BarMovement[];
-}
-
 const useSort = function ({ bars, sortType }: UseSortParams) {
   const sortFn = algos.get(sortType)!;
 
-  const [barMovements, setBarMovements] = useState<AllBarMovements>({});
+  const [barMovements, setBarMovements] = useState<{ [barId: string]: BarMovement[] }>({});
   const [sortStatus, setSortStatus] = useState<'not_sorted' | 'sorting' | 'sorted'>(
     'not_sorted'
   );

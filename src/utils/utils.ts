@@ -4,13 +4,23 @@ export const genRandomNumber = (lower: number = 10, upper: number = 100) => {
 
 export const genRandomColor = (exceptions?: string[]) => {
   const colors = [
-    '#6D09BC',
+    // '#6D09BC',
+    // '#000000',
+    // '#FF0000',
+    // '#1DCC00',
+    // '#D200CA',
+    // '#0057A7',
+    // '#0085FF'
+    '#9A6324',
+    '#808000',
+    '#000075',
     '#000000',
-    '#FF0000',
-    '#1DCC00',
-    '#D200CA',
-    '#0057A7',
-    '#0085FF'
+    '#3cb44b', // Green
+    '#4363d8', // Blue
+    '#e6194B',
+    '#911eb4', //purple
+    '#f032e6',
+    '#800000'
   ];
 
   if (!exceptions?.length) return colors[genRandomNumber(0, colors.length - 1)];

@@ -1,5 +1,5 @@
 import { algorithmNames } from './constants';
-import { genRandomColor, genRandomNumber as genRandomHeight } from './utils/numberUtils';
+import { genRandomColor, genRandomNumber as genRandomHeight } from './utils/utils';
 import { v4 as uuidv4 } from 'uuid';
 
 export type AlgoNickname = keyof typeof algorithmNames;

@@ -13,9 +13,7 @@ interface Props {
 }
 
 const getBarWidth = (parentEl: HTMLDivElement) => {
-  // console.log({ parentEl });
-  return (parentEl?.firstElementChild as HTMLDivElement | undefined)?.getBoundingClientRect()
-    .width;
+  return parentEl?.firstElementChild?.getBoundingClientRect().width;
 };
 
 const Bars: FC<Props> = function (props) {
@@ -23,7 +21,7 @@ const Bars: FC<Props> = function (props) {
   const barsRef = useRef<HTMLDivElement | null>(null);
 
   const bars: BarProps[] = useMemo(() => {
-    // return Array.from({ length: props.barsCount }, () => new BarClass());
+    return Array.from({ length: props.barsCount }, () => new BarClass());
     return [
       { height: 80, color: 'purple', id: '1' },
       { height: 40, color: 'green', id: '2' },
@@ -48,7 +46,8 @@ const Bars: FC<Props> = function (props) {
   }, [props.shouldSort]);
 
   useEffect(() => {
-    (sortStatus === 'sorting' ? props.onSorting : props.onSorted)?.();
+    if (sortStatus === 'sorting') return props.onSorting?.();
+    if (sortStatus === 'sorted') return props.onSorted?.();
   }, [sortStatus]);
 
   return (
