@@ -1,18 +1,13 @@
 import useAppContext from '../context/AppContext';
-import Bars from './Bars';
+import SelectionSort from './SelectionSort';
+import Bars from './bars/Bars';
 
 const Main = function () {
-  const { activeAlgoName, setIsSorting, btnSortClicked } = useAppContext();
+  const { activeAlgoName, setIsSorting } = useAppContext();
 
   return (
-    <main className="bg-white flex-grow-1" style={{}}>
-      <Bars
-        barsCount={500}
-        sortAlgo={activeAlgoName}
-        onSorting={setIsSorting?.bind(null, true)}
-        onSorted={setIsSorting?.bind(null, false)}
-        shouldSort={btnSortClicked}
-      />
+    <main className="bg-white flex-grow-1">
+      <SelectionSort />
     </main>
   );
 };

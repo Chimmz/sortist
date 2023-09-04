@@ -8,21 +8,20 @@ import {
 } from 'react';
 import { algorithmNames } from '../constants';
 import { AlgoNickname, BarClass, BarMovement, BarProps } from '../types';
-import useSort from '../hooks/useSort';
 
-interface AppContext {
+interface AppContextData {
   activeAlgoName: AlgoNickname;
   setActiveAlgoName?: React.Dispatch<SetStateAction<keyof typeof algorithmNames>>;
   isSorting: boolean;
   setIsSorting?: React.Dispatch<SetStateAction<boolean>>;
-  btnSortClicked: boolean;
-  setBtnSortClicked?: React.Dispatch<SetStateAction<boolean>>;
+  // btnSortClicked: boolean;
+  // setBtnSortClicked?: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const appContext = createContext<AppContext>({
+const appContext = createContext<AppContextData>({
   activeAlgoName: 'SELECTION_SORT',
-  isSorting: false,
-  btnSortClicked: false
+  isSorting: false
+  // btnSortClicked: false
 });
 
 export const AppContextProvider = (props: { children: ReactNode }) => {
@@ -38,9 +37,9 @@ export const AppContextProvider = (props: { children: ReactNode }) => {
         activeAlgoName,
         setActiveAlgoName,
         isSorting,
-        setIsSorting,
-        btnSortClicked,
-        setBtnSortClicked
+        setIsSorting
+        // btnSortClicked,
+        // setBtnSortClicked
       }}
     >
       {props.children}

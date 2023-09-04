@@ -7,8 +7,7 @@ import { algorithmNames } from '../constants';
 import useAppContext from '../context/AppContext';
 
 const Navbar = function () {
-  const { activeAlgoName, setActiveAlgoName, isSorting, setBtnSortClicked } =
-    useAppContext();
+  const { activeAlgoName, setActiveAlgoName, isSorting, setIsSorting } = useAppContext();
 
   return (
     <nav className="options d-flex align-items-center px-5 pt-2 flex-grow-1">
@@ -40,17 +39,18 @@ const Navbar = function () {
           <Form.Range />
         </div>
       </div>
+
       <div className="actions d-flex align-items-center gap-2 ms-auto">
         <button
           className="btn btn-pry"
-          onClick={setBtnSortClicked?.bind(null, true)}
+          // onClick={setBtnSortClicked?.bind(null, true)}
+          onClick={setIsSorting?.bind(null, true)}
           disabled={isSorting}
         >
-          {isSorting ? (
-            <Icon icon="carbon:pause-filled" width={18} />
-          ) : (
-            <Icon icon="ph:play-fill" width={13} />
-          )}
+          <Icon
+            icon={isSorting ? 'carbon:pause-filled' : 'ph:play-fill'}
+            width={isSorting ? 18 : 13}
+          />
           Start sorting
         </button>
         <button className="btn btn-pry-outline">Compare algorithms</button>

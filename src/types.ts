@@ -10,9 +10,11 @@ export interface BarMovementObj {
 }
 
 export interface BarProps {
-  id: string;
-  height: number;
-  color: string;
+  readonly id: string;
+  readonly height: number;
+  readonly color: string;
+  readonly translation: number;
+  translateX?: (displacement: number) => void;
 }
 
 export type Algo = (
@@ -26,13 +28,18 @@ export type Algo = (
 
 export class BarClass implements BarProps {
   constructor(
-    public height: number = genRandomHeight(15, 100),
-    public color: string = genRandomColor(),
-    readonly id: string = uuidv4()
+    readonly id: string = uuidv4(),
+    readonly height: number = genRandomHeight(15, 100),
+    readonly color: string = genRandomColor(),
+    public translation: number = 0
   ) {
     this.id = id;
     this.height = height;
     this.color = color;
+    this.translation = translation;
+  }
+  public translateX?(displacement: number) {
+    this.translation = this.translation + displacement;
   }
 }
 
@@ -40,8 +47,8 @@ export class BarMovement implements BarMovementObj {
   prevIndex: number;
   newIndex: number;
 
-  constructor(movt: [prevIndex: number, newIndex: number]) {
-    this.prevIndex = movt[0];
-    this.newIndex = movt[1];
+  constructor(prevIndex: number, newIndex: number) {
+    this.prevIndex = prevIndex;
+    this.newIndex = newIndex;
   }
 }
