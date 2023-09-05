@@ -10,9 +10,9 @@ interface Props {
 const Bars = forwardRef<HTMLDivElement | null, Props>(function (props, ref) {
   return (
     <div className="bars d-flex align-items-end flex-grow-1 px-2" ref={ref}>
-      {props.items.map(b => (
+      {/* {props.items.map(b => (
         <Bar {...b} key={b.id} />
-      ))}
+      ))} */}
     </div>
   );
 });

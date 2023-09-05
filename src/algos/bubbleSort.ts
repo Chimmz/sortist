@@ -1,4 +1,4 @@
-import { Algo, BarMovement, BarProps } from '../types';
+import { BarMovement, BarProps } from '../types';
 
 // const bubbleSort: Algo = function (bars: BarProps[], opts) {
 //   const barsArray = bars.slice(0);

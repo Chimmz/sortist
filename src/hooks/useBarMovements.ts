@@ -2,19 +2,21 @@ import { useState } from 'react';
 import { BarMovement } from '../types';
 
 const useBarMovements = () => {
-  const [barMovements, setBarMovements] = useState<{
+  const [state, setState] = useState<{
     [barID: string]: BarMovement[] | undefined;
   }>({});
 
-  const addBarMovement = (barID: string, movt: BarMovement) => {
-    setBarMovements(state => {
-      if (!state[barID]) state[barID] = [movt];
-      else state[barID]!.push(movt);
-      return state;
+  const doesBarHaveMovements = (barId: string) => !!state[barId];
+
+  const addBarMovement = (barId: string, movt: BarMovement) => {
+    setState(movements => {
+      if (!doesBarHaveMovements(barId)) movements[barId] = [movt];
+      else movements[barId]!.push(movt);
+      return movements;
     });
   };
 
-  return { barMovements, addBarMovement };
+  return { barMovements: state, addBarMovement };
 };
 
 export default useBarMovements;
