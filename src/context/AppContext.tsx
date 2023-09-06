@@ -3,41 +3,49 @@ import {
   SetStateAction,
   createContext,
   useContext,
-  useMemo,
+  useEffect,
   useState
 } from 'react';
 import { algorithmNames } from '../constants';
 import { AlgoNickname, BarClass, BarMovement, BarProps } from '../types';
 
 interface AppContextData {
-  activeAlgoName: AlgoNickname;
-  setActiveAlgoName?: React.Dispatch<SetStateAction<keyof typeof algorithmNames>>;
+  currentAlgo: AlgoNickname;
+  setCurrentAlgo?: React.Dispatch<SetStateAction<keyof typeof algorithmNames>>;
   isSorting: boolean;
   setIsSorting?: React.Dispatch<SetStateAction<boolean>>;
-  // btnSortClicked: boolean;
-  // setBtnSortClicked?: React.Dispatch<SetStateAction<boolean>>;
+  isSorted: boolean;
+  setIsSorted?: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const appContext = createContext<AppContextData>({
-  activeAlgoName: 'SELECTION_SORT',
-  isSorting: false
+  currentAlgo: 'BUBBLE_SORT',
+  isSorting: false,
+  isSorted: false
   // btnSortClicked: false
 });
 
 export const AppContextProvider = (props: { children: ReactNode }) => {
-  const [activeAlgoName, setActiveAlgoName] =
-    useState<keyof typeof algorithmNames>('SELECTION_SORT');
+  const [currentAlgo, setCurrentAlgo] = useState<keyof typeof algorithmNames>('BUBBLE_SORT');
 
   const [btnSortClicked, setBtnSortClicked] = useState(false);
   const [isSorting, setIsSorting] = useState(false);
+  const [isSorted, setIsSorted] = useState(false);
+
+  useEffect(() => {
+    setIsSorting(false);
+    setIsSorted(false);
+  }, [currentAlgo]);
 
   return (
     <appContext.Provider
       value={{
-        activeAlgoName,
-        setActiveAlgoName,
+        currentAlgo,
+        setCurrentAlgo,
         isSorting,
-        setIsSorting
+        setIsSorting,
+        isSorted,
+        setIsSorted
         // btnSortClicked,
         // setBtnSortClicked
       }}

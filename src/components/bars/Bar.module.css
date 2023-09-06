@@ -3,5 +3,5 @@
   border-top: 1px solid #fff;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  transition: transform 1s;
+  transition: transform 200ms;
 }

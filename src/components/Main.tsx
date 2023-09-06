@@ -1,15 +1,22 @@
+import { useMemo } from 'react';
+
 import useAppContext from '../context/AppContext';
 import SelectionSort from './SelectionSort';
-import Bars from './bars/Bars';
+import BubbleSort from './BubbleSort';
 
 const Main = function () {
-  const { activeAlgoName, setIsSorting } = useAppContext();
+  const { currentAlgo } = useAppContext();
 
-  return (
-    <main className="bg-white flex-grow-1">
-      <SelectionSort />
-    </main>
-  );
+  const content = useMemo(() => {
+    switch (currentAlgo) {
+      case 'BUBBLE_SORT':
+        return <BubbleSort />;
+      case 'SELECTION_SORT':
+        return <SelectionSort />;
+    }
+  }, [currentAlgo]);
+
+  return <main className="bg-white flex-grow-1">{content}</main>;
 };
 
 export default Main;

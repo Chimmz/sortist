@@ -7,7 +7,7 @@ import { algorithmNames } from '../constants';
 import useAppContext from '../context/AppContext';
 
 const Navbar = function () {
-  const { activeAlgoName, setActiveAlgoName, isSorting, setIsSorting } = useAppContext();
+  const { currentAlgo, setCurrentAlgo, isSorting, setIsSorting } = useAppContext();
 
   return (
     <nav className="options d-flex align-items-center px-5 pt-2 flex-grow-1">
@@ -18,20 +18,21 @@ const Navbar = function () {
       <div className="settings d-flex gap-5">
         <DropdownButton
           title={
-            algorithmNames[activeAlgoName as keyof typeof algorithmNames] ||
-            'Choose algorithm'
+            algorithmNames[currentAlgo as keyof typeof algorithmNames] || 'Choose algorithm'
           }
           variant="none"
         >
-          {Object.entries(algorithmNames).map(([algoKey, algoName]) => (
-            <Dropdown.Item
-              key={algoKey}
-              className="text-black"
-              onClick={() => setActiveAlgoName?.(algoKey as keyof typeof algorithmNames)}
-            >
-              {algoName}
-            </Dropdown.Item>
-          ))}
+          {Object.entries(algorithmNames)
+            .sort()
+            .map(([algoKey, algoName]) => (
+              <Dropdown.Item
+                key={algoKey}
+                className="text-black"
+                onClick={() => setCurrentAlgo?.(algoKey as keyof typeof algorithmNames)}
+              >
+                {algoName}
+              </Dropdown.Item>
+            ))}
         </DropdownButton>
 
         <div className="d-flex gap-2">

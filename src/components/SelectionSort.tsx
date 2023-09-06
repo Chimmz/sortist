@@ -28,53 +28,42 @@ function SelectionSort() {
       ['yellow', 30, 'yellow'],
       ['purple', 40, 'purple'],
       ['blue', 30, 'blue'],
-      ['black', 20, 'black'],
-      ['ngered', 80, 'orangered'],
-      ['k', 90, 'pink'],
-      ['wn', 30, 'brown'],
-      ['low', 85, 'yellow'],
-      ['ple', 40, 'purple'],
-      ['e', 40, 'blue'],
-      ['ck', 20, 'black'],
-      ['brwn', 30, 'brown'],
-      ['yllow', 85, 'yellow'],
-      ['purpe', 40, 'purple']
+      ['black', 20, 'black']
       // @ts-ignore
     ].map((obj, i) => new BarClass(...obj, i));
   });
   const [barsCopy, setBarsCopy] = useState<BarClass[]>(bars.slice());
 
   useEffect(() => {
-    if (lastSortedIndex < 0) return;
-
-    const maxIterationReached = lastSortedIndex === bars.length - 2;
-    if (maxIterationReached) return setIsSorting?.(false);
+    if (lastSortedIndex === -1) return; // If sort hasnt started
+    // If max iterations is reached
+    if (lastSortedIndex === bars.length - 2) return setIsSorting?.(false);
 
     let shortestBarIndex = lastSortedIndex;
     let shortestBar = bars[shortestBarIndex];
-
-    console.log(`I thought ${bars[lastSortedIndex].color} was the shortest`);
 
     for (let i = lastSortedIndex + 1; i < bars.length; i++) {
       if (bars[i].height > shortestBar.height) continue;
       shortestBar = bars[i];
       shortestBarIndex = i;
     }
-    console.log(`I realised ${shortestBar.color} was the actual shortest`);
 
     const lastSortedBar = bars[lastSortedIndex];
 
-    addBarMovement(shortestBar.id, new BarMovement(shortestBarIndex, lastSortedIndex));
-    addBarMovement(lastSortedBar.id, new BarMovement(lastSortedIndex, shortestBarIndex));
-    shortestBar.moveToIndex!(lastSortedIndex);
-    lastSortedBar.moveToIndex!(shortestBarIndex);
-
+    // Switch bar positions
     setBars(arr => {
       [arr[lastSortedIndex], arr[shortestBarIndex]] = [shortestBar, lastSortedBar];
       return arr;
     });
 
-    setTimeout(() => setLastSortedIndex(i => i + 1), 1005);
+    // Animate switch in bar positions
+    addBarMovement(shortestBar.id, new BarMovement(shortestBarIndex, lastSortedIndex));
+    addBarMovement(lastSortedBar.id, new BarMovement(lastSortedIndex, shortestBarIndex));
+    shortestBar.moveToIndex!(lastSortedIndex);
+    lastSortedBar.moveToIndex!(shortestBarIndex);
+
+    // Go to next iteration
+    setTimeout(() => setLastSortedIndex(i => i + 1), 200);
   }, [lastSortedIndex, setLastSortedIndex, setBars]);
 
   const sort = () => setLastSortedIndex(0);
@@ -90,8 +79,6 @@ function SelectionSort() {
       ))}
     </div>
   );
-
-  // return <Bars items={bars} ref={barsRef} movements={barMovements}/>;
 }
 
 export default SelectionSort;
