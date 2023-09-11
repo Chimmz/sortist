@@ -17,6 +17,15 @@ body {
   font-family: 'Poppins', Helvetica, Arial, sans-serif !important;
   min-height: 100vh;
   padding: 0 !important;
+  /* background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.97) 20%,
+      rgba(255, 255, 255, 0.97) 100%
+    ),
+    url('../public/img/mount-img.jpg'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #root {
@@ -25,16 +34,13 @@ body {
   min-height: 100vh;
 }
 
-.nav {
+nav {
+  background-color: transparent;
 }
 
 main {
   position: relative;
   min-height: 87vh;
-  /* background-image: url('../public/img/3d-white-img.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center; */
 }
 
 [class^='btn'] {

@@ -1,10 +1,9 @@
 import { useState, FC, useEffect, useMemo, useRef } from 'react';
-import Bars from './bars/Bars';
 import { BarClass, BarMovement, BarProps } from '../types';
 import useAppContext from '../context/AppContext';
 import useBarMovements from '../hooks/useBarMovements';
 import useBar from '../hooks/useBar';
-import Bar from './bars/Bar';
+import Bar from '../components/bars/Bar';
 
 const TOTAL_BARS = 150;
 

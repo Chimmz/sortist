@@ -19,14 +19,15 @@ interface AppContextData {
 }
 
 const appContext = createContext<AppContextData>({
-  currentAlgo: 'BUBBLE_SORT',
+  currentAlgo: 'INSERTION_SORT',
   isSorting: false,
   isSorted: false
   // btnSortClicked: false
 });
 
 export const AppContextProvider = (props: { children: ReactNode }) => {
-  const [currentAlgo, setCurrentAlgo] = useState<keyof typeof algorithmNames>('BUBBLE_SORT');
+  const [currentAlgo, setCurrentAlgo] =
+    useState<keyof typeof algorithmNames>('INSERTION_SORT');
 
   const [btnSortClicked, setBtnSortClicked] = useState(false);
   const [isSorting, setIsSorting] = useState(false);

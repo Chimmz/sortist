@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
 
 import useAppContext from '../context/AppContext';
-import SelectionSort from './SelectionSort';
-import BubbleSort from './BubbleSort';
+import SelectionSort from '../algos/SelectionSort';
+import BubbleSort from '../algos/BubbleSort';
+import QuickSort from '../algos/QuickSort';
+import InsertionSort from '../algos/InsertionSort';
 
 const Main = function () {
   const { currentAlgo } = useAppContext();
@@ -13,10 +15,14 @@ const Main = function () {
         return <BubbleSort />;
       case 'SELECTION_SORT':
         return <SelectionSort />;
+      case 'QUICK_SORT':
+        return <QuickSort />;
+      case 'INSERTION_SORT':
+        return <InsertionSort />;
     }
   }, [currentAlgo]);
 
-  return <main className="bg-white flex-grow-1">{content}</main>;
+  return <main className="flex-grow-1">{content}</main>;
 };
 
 export default Main;
