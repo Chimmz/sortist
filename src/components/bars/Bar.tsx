@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import styles from './Bar.module.css';
 import cls from 'classnames';
-import { BarClass, BarMovement, BarProps } from '../../types';
+import { BarClass, BarMovement } from '../../types';
 
 type Props = BarClass & { movs: BarMovement[] | undefined };
 
@@ -20,7 +20,7 @@ function Bar(props: Props) {
 
   return (
     <div
-      className={cls(styles.bar, 'flex-grow-1')}
+      className={cls(styles.bar, 'flex-grow-1', props.alignment === 'top' && 'mb-auto')}
       style={{
         color: 'white',
         height: `${props.height}%`,

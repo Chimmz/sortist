@@ -7,7 +7,7 @@ import {
   useState
 } from 'react';
 import { algorithmNames } from '../constants';
-import { AlgoNickname, BarClass, BarMovement, BarProps } from '../types';
+import { AlgoNickname } from '../types';
 
 interface AppContextData {
   currentAlgo: AlgoNickname;
@@ -19,15 +19,14 @@ interface AppContextData {
 }
 
 const appContext = createContext<AppContextData>({
-  currentAlgo: 'INSERTION_SORT',
+  currentAlgo: 'QUICK_SORT',
   isSorting: false,
   isSorted: false
   // btnSortClicked: false
 });
 
 export const AppContextProvider = (props: { children: ReactNode }) => {
-  const [currentAlgo, setCurrentAlgo] =
-    useState<keyof typeof algorithmNames>('INSERTION_SORT');
+  const [currentAlgo, setCurrentAlgo] = useState<keyof typeof algorithmNames>('QUICK_SORT');
 
   const [btnSortClicked, setBtnSortClicked] = useState(false);
   const [isSorting, setIsSorting] = useState(false);

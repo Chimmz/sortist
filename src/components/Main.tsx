@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 
 import useAppContext from '../context/AppContext';
-import SelectionSort from '../algos/SelectionSort';
-import BubbleSort from '../algos/BubbleSort';
-import QuickSort from '../algos/QuickSort';
-import InsertionSort from '../algos/InsertionSort';
+import SelectionSort from './algos/SelectionSort';
+import BubbleSort from './algos/BubbleSort';
+import QuickSort from './algos/QuickSort';
+import InsertionSort from './algos/InsertionSort';
+import QuickSort2 from './algos/QuickSort2';
 
 const Main = function () {
   const { currentAlgo } = useAppContext();

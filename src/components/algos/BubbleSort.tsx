@@ -1,38 +1,22 @@
 import { useState, FC, useEffect, useMemo, useRef } from 'react';
-import { BarClass, BarMovement, BarProps } from '../types';
-import useAppContext from '../context/AppContext';
-import useBarMovements from '../hooks/useBarMovements';
-import useBar from '../hooks/useBar';
-import Bar from '../components/bars/Bar';
+import { BarClass, BarMovement } from '../../types';
+import useAppContext from '../../context/AppContext';
+import useBarMovements from '../../hooks/useBarMovements';
+import useBar from '../../hooks/useBar';
+import Bar from '../bars/Bar';
+import { genBars } from '../../utils/utils';
 
-const TOTAL_BARS = 150;
+const TOTAL_BARS = 50;
 
 function BubbleSort() {
   const { isSorting: btnSortClicked, setIsSorting } = useAppContext();
 
-  const barsRef = useRef<HTMLDivElement | null>(null);
-  const { barWidth } = useBar(barsRef);
   const { barMovements, addBarMovement } = useBarMovements();
 
   const [passesTotal, setTotalPasses] = useState(-1);
   const [itr, setItr] = useState(-1);
 
-  const [bars, setBars] = useState<BarClass[]>(() => {
-    return Array.from(
-      { length: TOTAL_BARS },
-      (_, i) => new BarClass(undefined, undefined, undefined, i)
-    );
-    return [
-      ['orangered', 80, 'orangered'],
-      ['purple', 90, 'purple'],
-      ['pink', 40, 'pink'],
-      ['yellow', 70, 'yellow'],
-      ['brown', 55, 'brown'],
-      ['blue', 30, 'blue'],
-      ['black', 20, 'black']
-      // @ts-ignore
-    ].map((obj, i) => new BarClass(...obj, i));
-  });
+  const [bars, setBars] = useState<BarClass[]>(genBars.bind(null, TOTAL_BARS, 'bottom'));
   const [barsCopy, setBarsCopy] = useState<BarClass[]>(bars.slice());
 
   useEffect(() => {
@@ -78,7 +62,7 @@ function BubbleSort() {
   }, [btnSortClicked]);
 
   return (
-    <div className="bars d-flex align-items-end flex-grow-1 px-2" ref={barsRef}>
+    <div className="bars d-flex align-items-end flex-grow-1 px-2">
       {/* Rendering a copy of original/un-manipulated array */}
       {barsCopy.map(b => (
         <Bar {...b} key={b.id} movs={barMovements[b.id]} />

@@ -1,3 +1,5 @@
+import { BarClass } from '../types';
+
 export const genRandomNumber = (lower: number = 10, upper: number = 100) => {
   return Math.floor(Math.random() * (upper - lower)) + lower;
 };
@@ -32,4 +34,11 @@ export const genRandomColor = (exceptions?: string[]) => {
   } while (exclusions.has(randColor));
 
   return randColor;
+};
+
+export const genBars = (total: number, alignment?: 'top' | 'bottom') => {
+  return Array.from(
+    { length: total },
+    (_, i) => new BarClass(undefined, undefined, undefined, i, alignment)
+  );
 };

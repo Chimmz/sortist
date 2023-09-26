@@ -1,9 +1,10 @@
 import { useState, FC, useEffect, useMemo, useRef } from 'react';
-import { BarClass, BarMovement, BarProps } from '../types';
-import useAppContext from '../context/AppContext';
-import useBarMovements from '../hooks/useBarMovements';
-import useBar from '../hooks/useBar';
-import Bar from '../components/bars/Bar';
+import { BarClass, BarMovement } from '../../types';
+import useAppContext from '../../context/AppContext';
+import useBarMovements from '../../hooks/useBarMovements';
+import useBar from '../../hooks/useBar';
+import Bar from '../bars/Bar';
+import { genBars } from '../../utils/utils';
 
 const TOTAL_BARS = 200;
 
@@ -15,22 +16,7 @@ function SelectionSort() {
   const { barWidth } = useBar(barsRef);
   const { barMovements, addBarMovement } = useBarMovements();
 
-  const [bars, setBars] = useState<BarClass[]>(() => {
-    return Array.from(
-      { length: TOTAL_BARS },
-      (_, i) => new BarClass(undefined, undefined, undefined, i)
-    );
-    return [
-      ['orangered', 80, 'orangered'],
-      ['pink', 90, 'pink'],
-      ['brown', 40, 'brown'],
-      ['yellow', 30, 'yellow'],
-      ['purple', 40, 'purple'],
-      ['blue', 30, 'blue'],
-      ['black', 20, 'black']
-      // @ts-ignore
-    ].map((obj, i) => new BarClass(...obj, i));
-  });
+  const [bars, setBars] = useState<BarClass[]>(genBars.bind(null, TOTAL_BARS, 'bottom'));
   const [barsCopy, setBarsCopy] = useState<BarClass[]>(bars.slice());
 
   useEffect(() => {
