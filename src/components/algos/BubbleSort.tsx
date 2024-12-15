@@ -8,7 +8,7 @@ import { genBars } from '../../utils/utils';
 
 const TOTAL_BARS = 50;
 
-function BubbleSort() {
+const BubbleSort = function () {
   const { isSorting: btnSortClicked, setIsSorting } = useAppContext();
 
   const { barMovements, addBarMovement } = useBarMovements();
@@ -69,6 +69,6 @@ function BubbleSort() {
       ))}
     </div>
   );
-}
+};
 
 export default BubbleSort;
